@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Legal Document Assistant</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                ⚖️ Legal AI
+            </div>
+
+
+    <label for="document-upload" class="upload-btn">
+        + Upload Your Document
+    </label>
+ <input  
+    type="file"
+    id="document-upload"
+    name="file"
+    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+    hidden
+    onchange="uploadPDF()"
+>
+
+
+
+
+        
+            <nav>
+                <button onclick="showPDF()">📄 PDF Reader</button>
+                <button onclick="analyzeResume()">📋 Resume Reader</button>
+                <button onclick="analyzeReceipt()">🧾 Bill / Receipt</button>
+                <button onclick="adjustDocumentSize()">↔️ Adjust Document Size</button>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button>⚙️ Settings</button>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN AREA -->
+        <main class="main">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <h1>AI Legal Document Assistant</h1>
+                <div class="profile">👤</div>
+            </header>
+
+
+            <!-- CHAT AREA -->
+            <section class="chat-area">
+
+                <div class="welcome">
+
+                    <div class="welcome-icon">⚖️</div>
+
+                    <h2>How can I help you today?</h2>
+
+                    <p>
+                        Upload a document or ask me anything about your document.
+                    </p>
+
+                </div>
+
+
+                <!-- QUICK OPTIONS -->
+                <div class="quick-options">
+
+                    <div class="option-card" onclick="showPDF()">
+                        <span>📄</span>
+                        <h3>PDF Reader</h3>
+                        <p>Read and understand your PDF documents.</p>
+                    </div>
+
+                    <div class="option-card" onclick="analyzeResume()">
+                        <span>📋</span>
+                        <h3>Resume Reader</h3>
+                        <p>Analyze and extract information from resumes.</p>
+                    </div>
+
+                    <div class="option-card" onclick="analyzeReceipt()">
+                        <span>🧾</span>
+                        <h3>Bill / Receipt</h3>
+                        <p>Extract important information from bills.</p>
+                    </div>
+
+                    <div class="option-card" onclick="adjustDocumentSize()">
+                        <span>↔️</span>
+                        <h3>Adjust Document Size</h3>
+                        <p>Create a short, medium, or detailed version of the document.</p>
+                    </div> 
+
+                    <div class="option-card" onclick="summarizeDocument()">
+                        <span>📑</span>
+                        <h3>Document Summary</h3>
+                        <p>Generate a quick summary of the uploaded document.</p>
+                    </div>
+                </div>
+
+                <div id="pdfText" style="display:none;"></div>
+
+                <div id="chatBox" class="chat-box"></div>
+
+            </section>
+
+
+            <!-- CHAT INPUT -->
+            <div class="input-container">
+
+                <button class="attach-btn">📎</button>
+
+            <input
+                  type="text"
+                  id="question"
+                  placeholder="Ask something about your document..."
+                  onkeypress="if(event.key==='Enter'){askAI();}"
+>  
+
+                <button class="send-btn" onclick="askAI()">➤</button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
